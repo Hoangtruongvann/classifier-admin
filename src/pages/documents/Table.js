@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { columns, data } from "../../fakers/project";
+import { columns, data } from "../../fakers/documents";
 
 const Table = () => {
   const [pending, setPending] = useState(true);
@@ -22,8 +22,9 @@ const Table = () => {
       pagination
       responsive
       progressPending={pending}
-      title={"Projects"}
+      title={"Documents"}
     />
   );
 };
+
 export default Table;

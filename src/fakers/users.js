@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash, faInfo } from "@fortawesome/free-solid-svg-icons";
 const columns = [
   {
     name: "#",
@@ -29,6 +29,7 @@ const columns = [
     button: true,
     cell: () => (
       <>
+        <FontAwesomeIcon icon={faInfo} className="mr-2" />
         <FontAwesomeIcon icon={faEdit} className="mr-2" />
         <FontAwesomeIcon icon={faTrash} />
       </>

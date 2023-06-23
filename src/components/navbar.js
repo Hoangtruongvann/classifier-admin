@@ -28,7 +28,7 @@ const Navbar = () => {
             </a> */}
 
           <a className="text-sm" href="/login">
-            Login now!
+            Hello <span className="font-bold text-lg">Admininstrator</span>!
           </a>
         </div>
       </div>

@@ -1,12 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const cookies = new Cookies();
   const location = useLocation();
+  const navigate = useNavigate();
   const isRouteMatch = (path) => {
     if (location.pathname.indexOf(path) === 0) return true;
     return false;
+  };
+
+  const logout = () => {
+    cookies.remove("_token");
+    navigate("/login");
   };
   return (
     <nav id="sidebar">
@@ -51,10 +59,17 @@ const Sidebar = () => {
               Documents
             </Link>
           </li>
-          <li>
+          <li className={isRouteMatch("/settings") ? "active" : ""}>
             <Link to="/settings" className="nav-link link-dark">
               <i className="fa-solid fa-file mr-3"></i>
               Setting
+            </Link>
+          </li>
+
+          <li onClick={logout}>
+            <Link to={"/"} className="nav-link link-dark">
+              <i className="fa-solid fa-file mr-3"></i>
+              Log out
             </Link>
           </li>
         </ul>

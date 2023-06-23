@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
-import Documents from "./documents";
-import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
-import Profile from "./pages/profile";
-import Projects from "./pages/projects";
-import Users from "./pages/users";
+import { DocumentsTable } from "./pages/documents";
+import { Dashboard } from "./pages/dashboard";
+import { Login } from "./pages/authentications";
+import { Profile } from "./pages/profile";
+import { ProjectsTable } from "./pages/projects";
+import { UsersTable } from "./pages/users";
+import { useEffect, useState } from "react";
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="documents" element={<Documents />} />
-          <Route path="users" element={<Users />} />
+          <Route path="projects" element={<ProjectsTable />} />
+          <Route path="documents" element={<DocumentsTable />} />
+          <Route path="users" element={<UsersTable />} />
           <Route path="settings" element={<Profile />} />
         </Route>
       </Routes>

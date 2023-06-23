@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import Navbar from "../../components/navbar";
 
-import Form from "./form";
+import LoginForm from "./components/LoginForm";
 
 const Login = () => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (cookies.get("_token")) navigate("/");
+  }, []);
   return (
     <div>
       <Navbar />
@@ -27,7 +34,7 @@ const Login = () => {
                       consectetur adipisicing.
                     </p>
                   </div>
-                  <Form />
+                  <LoginForm />
                 </div>
               </div>
             </div>
