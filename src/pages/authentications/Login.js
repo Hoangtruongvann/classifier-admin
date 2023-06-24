@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (cookies.get("_token")) navigate("/");
-  }, []);
+  });
   return (
     <div>
       <Navbar />

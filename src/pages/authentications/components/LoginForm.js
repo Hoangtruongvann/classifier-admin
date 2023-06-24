@@ -23,7 +23,8 @@ const LoginForm = () => {
     e.preventDefault();
     toast.success("Login successfully!");
     cookies.set("_token", "token");
-    navigate("/");
+    cookies.set("email", email);
+    navigate(-1);
   };
   return (
     <form onSubmit={submit}>

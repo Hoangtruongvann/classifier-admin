@@ -10,7 +10,7 @@ const Layout = () => {
   const cookies = new Cookies();
   useEffect(() => {
     if (!cookies.get("_token")) navigate("/login");
-  }, []);
+  });
   return (
     <div>
       <div>

@@ -1,12 +1,11 @@
 import React from "react";
 import Cookies from "universal-cookie";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const cookies = new Cookies();
   const location = useLocation();
-  const navigate = useNavigate();
   const isRouteMatch = (path) => {
     if (location.pathname.indexOf(path) === 0) return true;
     return false;
@@ -14,7 +13,6 @@ const Sidebar = () => {
 
   const logout = () => {
     cookies.remove("_token");
-    navigate("/login");
   };
   return (
     <nav id="sidebar">
