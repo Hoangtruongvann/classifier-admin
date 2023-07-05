@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
-import { projectServices, typeServices } from "../../services";
+import { projectServices, sampleServices, typeServices } from "../../services";
 
 const Create = () => {
   const { id } = useParams();
@@ -32,9 +32,9 @@ const Create = () => {
     form.append("sample", sample);
     form.append("project_id", project);
     form.append("user_id", user.id);
-    const { status, data } = await projectServices.create(form);
+    const { status, data } = await sampleServices.create(form);
     if (status === 200) {
-      toast.success("Create project successfully!");
+      toast.success("Create sample successfully!");
       navigate("/projects/" + id + "/samples");
     } else {
       toast.error(data.message);

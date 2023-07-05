@@ -35,17 +35,22 @@ const Table = () => {
       sortable: true,
     },
     {
-      name: "Project Name",
-      selector: (row) => row.projectName,
+      name: "Label",
+      selector: (row) => row.label,
     },
     {
-      name: "Type",
-      selector: (row) => row.projectType,
+      name: "Sample",
+      selector: (row) => row.sample,
       sortable: true,
     },
     {
-      name: "Description",
-      selector: (row) => row.description,
+      name: "Project ID",
+      selector: (row) => row.project_id,
+      sortable: true,
+    },
+    {
+      name: "User ID",
+      selector: (row) => row.created_user,
       sortable: true,
     },
     {
@@ -53,7 +58,7 @@ const Table = () => {
       button: true,
       cell: (row) => (
         <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-          {row.status}
+          active
         </span>
       ),
     },
