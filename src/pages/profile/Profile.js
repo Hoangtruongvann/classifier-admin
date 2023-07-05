@@ -1,6 +1,9 @@
 import React from "react";
+import Cookies from "universal-cookie";
 
 const Profile = () => {
+  const cookies = new Cookies();
+  const user = cookies.get("user");
   return (
     <div>
       <div className="p-8 bg-white shadow mt-12 h-[800px]">
@@ -57,9 +60,9 @@ const Profile = () => {
         <div className="mt-20 text-center border-b pb-12 h-[450px]">
           {" "}
           <h1 className="text-4xl font-medium text-gray-700">
-            Jessica Jones, <span className="font-light text-gray-500">27</span>
+            {user.fullname},{" "}
+            <span className="font-light text-gray-500">27</span>
           </h1>{" "}
-          <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>{" "}
           <p className="mt-8 text-gray-500">Administrator</p>{" "}
           <p className="mt-2 text-gray-500">University of Computer Science</p>{" "}
         </div>{" "}

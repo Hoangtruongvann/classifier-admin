@@ -8,20 +8,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
-import { userServices } from "../../services";
+import { roleServices } from "../../services";
 
 const Table = () => {
   const [pending, setPending] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState([]);
 
-  const getUsers = async () => {
+  const getRoles = async () => {
     setPending(true);
-    const { data } = await userServices.getAll();
-    setUsers(data);
+    const { data } = await roleServices.getAll();
+    setRoles(data);
     setPending(false);
   };
   useEffect(() => {
-    getUsers();
+    getRoles();
   }, []);
 
   const columns = [
@@ -31,34 +31,22 @@ const Table = () => {
       sortable: true,
     },
     {
-      name: "User Name",
-      selector: (row) => row.username,
+      name: "Name",
+      selector: (row) => row.name,
     },
     {
-      name: "Full Name",
-      selector: (row) => row.fullname,
+      name: "Description",
+      selector: (row) => row.description,
       sortable: true,
     },
-    {
-      name: "Role",
-      selector: (row) => row.role,
-      sortable: true,
-    },
+
     {
       name: "Status",
       button: true,
       cell: (row) => (
-        <>
-          {row.is_active ? (
-            <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-              active
-            </span>
-          ) : (
-            <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-              Inactive
-            </span>
-          )}
-        </>
+        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
+          active
+        </span>
       ),
     },
     ,
@@ -79,7 +67,7 @@ const Table = () => {
       <div className="flex justify-end">
         <Link
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-          to="/users/create"
+          to="/roles/create"
         >
           <FontAwesomeIcon icon={faAdd} className="mr-2" />
           <span>Create</span>
@@ -87,7 +75,7 @@ const Table = () => {
       </div>
       <DataTable
         columns={columns}
-        data={users}
+        data={roles}
         direction="auto"
         fixedHeader
         fixedHeaderScrollHeight="800px"
@@ -96,7 +84,7 @@ const Table = () => {
         pagination
         responsive
         progressPending={pending}
-        title={"Users "}
+        title={"Roles "}
       />
     </>
   );

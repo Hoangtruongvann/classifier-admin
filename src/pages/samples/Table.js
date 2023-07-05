@@ -1,27 +1,31 @@
 import {
   faAdd,
   faEdit,
-  faInfo,
+  faListDots,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { userServices } from "../../services";
+import { sampleServices } from "../../services";
 
 const Table = () => {
-  const [pending, setPending] = useState(true);
-  const [users, setUsers] = useState([]);
+  const { id } = useParams();
 
-  const getUsers = async () => {
+  const [pending, setPending] = useState(true);
+  const [samples, setSamples] = useState([]);
+  const navigate = useNavigate();
+
+  const getSamples = async () => {
     setPending(true);
-    const { data } = await userServices.getAll();
-    setUsers(data);
+    const { data } = await sampleServices.getSamplesByProjectId(id);
+    setSamples(data);
     setPending(false);
   };
   useEffect(() => {
-    getUsers();
+    getSamples();
   }, []);
 
   const columns = [
@@ -31,55 +35,48 @@ const Table = () => {
       sortable: true,
     },
     {
-      name: "User Name",
-      selector: (row) => row.username,
+      name: "Project Name",
+      selector: (row) => row.projectName,
     },
     {
-      name: "Full Name",
-      selector: (row) => row.fullname,
+      name: "Type",
+      selector: (row) => row.projectType,
       sortable: true,
     },
     {
-      name: "Role",
-      selector: (row) => row.role,
+      name: "Description",
+      selector: (row) => row.description,
       sortable: true,
     },
     {
       name: "Status",
       button: true,
       cell: (row) => (
-        <>
-          {row.is_active ? (
-            <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-              active
-            </span>
-          ) : (
-            <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-              Inactive
-            </span>
-          )}
-        </>
+        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
+          {row.status}
+        </span>
       ),
     },
     ,
     {
       name: "Actions",
       button: true,
-      cell: () => (
+      cell: (row) => (
         <>
-          <FontAwesomeIcon icon={faInfo} className="mr-2" />
+          <FontAwesomeIcon icon={faListDots} className="mr-2" />
           <FontAwesomeIcon icon={faEdit} className="mr-2" />
           <FontAwesomeIcon icon={faTrash} />
         </>
       ),
     },
   ];
+
   return (
     <>
       <div className="flex justify-end">
         <Link
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-          to="/users/create"
+          to={"/projects/" + id + "/samples/create"}
         >
           <FontAwesomeIcon icon={faAdd} className="mr-2" />
           <span>Create</span>
@@ -87,7 +84,7 @@ const Table = () => {
       </div>
       <DataTable
         columns={columns}
-        data={users}
+        data={samples}
         direction="auto"
         fixedHeader
         fixedHeaderScrollHeight="800px"
@@ -96,7 +93,7 @@ const Table = () => {
         pagination
         responsive
         progressPending={pending}
-        title={"Users "}
+        title={"Samples"}
       />
     </>
   );

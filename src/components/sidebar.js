@@ -12,7 +12,7 @@ const Sidebar = () => {
   };
 
   const logout = () => {
-    cookies.remove("_token");
+    cookies.remove("auth");
   };
   return (
     <nav id="sidebar">
@@ -39,28 +39,35 @@ const Sidebar = () => {
               Dashboard
             </Link>
           </li>
-          <li className={isRouteMatch("/users") ? "active" : ""}>
-            <Link to="/users" className="nav-link link-dark">
-              <i className="fa-solid fa-school mr-3"></i>
-              Users
-            </Link>
-          </li>
+
           <li className={isRouteMatch("/projects") ? "active" : ""}>
             <Link to="/projects" className="nav-link link-dark">
               <i className="fa-solid fa-users mr-3"></i>
               Projects
             </Link>
           </li>
-          <li className={isRouteMatch("/documents") ? "active" : ""}>
-            <Link to="/documents" className="nav-link link-dark">
+          <li className={isRouteMatch("/users") ? "active" : ""}>
+            <Link to="/users" className="nav-link link-dark">
+              <i className="fa-solid fa-school mr-3"></i>
+              Users
+            </Link>
+          </li>
+          <li className={isRouteMatch("/roles") ? "active" : ""}>
+            <Link to="/roles" className="nav-link link-dark">
+              <i className="fa-solid fa-school mr-3"></i>
+              Roles
+            </Link>
+          </li>
+          <li className={isRouteMatch("/types") ? "active" : ""}>
+            <Link to="/types" className="nav-link link-dark">
               <i className="fa-solid fa-users mr-3"></i>
-              Documents
+              Project Types
             </Link>
           </li>
           <li className={isRouteMatch("/settings") ? "active" : ""}>
             <Link to="/settings" className="nav-link link-dark">
               <i className="fa-solid fa-file mr-3"></i>
-              Setting
+              Profile
             </Link>
           </li>
 

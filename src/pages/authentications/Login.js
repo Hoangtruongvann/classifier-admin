@@ -8,8 +8,9 @@ import LoginForm from "./components/LoginForm";
 const Login = () => {
   const cookies = new Cookies();
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (cookies.get("_token")) navigate("/");
+    if (cookies.get("auth")) navigate("/");
   });
   return (
     <div>

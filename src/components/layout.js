@@ -3,16 +3,18 @@ import Cookies from "universal-cookie";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const cookies = new Cookies();
   useEffect(() => {
-    if (!cookies.get("_token")) navigate("/login");
+    if (!cookies.get("auth")) navigate("/login");
   });
   return (
     <div>
+      <ToastContainer />
       <div>
         <Navbar />
         <section className="relative">

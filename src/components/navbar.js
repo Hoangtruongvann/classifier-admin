@@ -7,7 +7,7 @@ const Navbar = () => {
   const [email, setEmail] = useState(null);
 
   useEffect(() => {
-    if (cookies.get("_token")) setEmail(cookies.get("email"));
+    if (cookies.get("auth")) setEmail(cookies.get("user").fullname);
   });
   return (
     <div>
